@@ -1,0 +1,106 @@
+/* blue image border extends beyond the red gallery border.
+This is due to the way browsers calculate the size of container elements.
+The box-sizing property is used to set this behavior.
+By default, the content-box model is used. With this model,
+when an element has a specific width,
+that width is calculated based only on the element's content.
+Padding and border values get added to the total width,
+so the element grows to accommodate these values. */
+
+/* .gallery {
+    width: 50%;
+    border: 5px solid red;
+}
+
+img {
+    width: 100%;
+    border: 5px solid blue;
+    padding: 5px;
+} */
+
+* {
+    /* box-sizing: content-box; */
+    box-sizing: border-box;
+}
+body {
+    /* clear all the default margin */
+    margin: 0;
+    background-color: #f5f6f7;
+    font-family: sans-serif;
+}
+.header {
+    background-color: #0a0a23;
+    color: #fff;
+    padding: 32px;
+    text-align: center;
+    text-transform: uppercase;
+    border-bottom: 4px solid #fdb347;
+}
+.gallery {
+    display: flex;
+    /* default direction is row,
+    it has 4 different directions
+    flex-direction: 
+    1. row
+    2. column
+    3. row-reverse
+    4. column-reverse*/
+    flex-direction: row;
+    flex-wrap: wrap;
+    /* flex wrap determines how content should behave 
+    if parent container is too small to fit the item */
+    justify-content: center;
+    /* justify content determines the position of items 
+    along the main axis.
+    if row is selected, x axis is main axis
+    if column is select, y axis is main axis */
+    align-items: center;
+    /* align-items determines the position of items
+    along the cross axis.
+    if row is selected, y axis is the cross axis
+    if column is selected, x axis is the cross axis*/
+    margin: 20px auto;
+    padding: 20px 10px;
+    max-width: 1200px;
+    gap: 20px;
+    /* gap property sets the gap between items horizontaly and vertically
+    gap property is combination of gap-column and gap-row.
+    we can use them seperately but if we only use gap, its the same for both */
+}
+.gallery img {
+    /* img width is 100% of the parenty gallery element and not body element */
+    /* if max width is provided it will be whichever comes first */
+
+    width: 100%;
+    max-width: 350px;
+    height: 300px;
+    object-fit: cover;
+    /* if images get distorted because of the different sizes 
+    we can use object-fit to make them look better */
+    border-radius: 10px;
+    border: 2px dashed #fdb347;
+    box-shadow: 5px 5px 10px #1e1408;
+    opacity: 0.7;
+    transition: transform 1s, opacity 1s;
+}
+
+img:hover {
+    transform: scale(1.1);
+    opacity: 1;
+}
+
+/* if the width of the page is smaller, we might see the last image
+centered on the page, we can add a blank dummy item to make it even,
+that will make the image aligned to the left */
+
+.gallery::after {
+    width: 350px;
+    content: '';
+}
+
+footer {
+    text-align: center;
+}
+p {
+    margin: 10px auto;
+}
